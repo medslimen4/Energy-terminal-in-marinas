@@ -18,7 +18,7 @@ public:
   bool subscribe(const std::string& topic, uint8_t qos = 0) override;
   bool unsubscribe(const std::string& topic) override;
   void loop() override;
-  bool connected()  override;
+  bool connected() override;
 
   void messageReceived(char* topic, byte* payload, unsigned int length);
 };
