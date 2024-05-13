@@ -4,7 +4,7 @@
 This projet is developed during Labs of the subject high level embedded development
 
 By:
-Mohamed slimen
+Mohamed slimen <br>
 Under-graduated students, 
 Professional Master's in IoT Service Development
 
