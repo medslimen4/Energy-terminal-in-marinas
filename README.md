@@ -5,14 +5,14 @@ This projet is developed during Labs of the subject high level embedded developm
 
 By:
 Mohamed slimen <br>
-Under-graduated students, 
-Professional Master's in IoT Service Development
+Under-graduated students, <br>
+Professional Master's in IoT Service Development  <br>
 
 <br>
-Under the supervision of:
-Wahid Bannour , 
-Researcher and Technologist , 
-Higher Institute of Technological Studies of Mahdia (ISET Mahdia)
+Under the supervision of: <br>
+Wahid Bannour ,  <br>
+Researcher and Technologist ,  <br>
+Higher Institute of Technological Studies of Mahdia (ISET Mahdia) <br>
 
 
 <h3>Title of the project:</h3>
