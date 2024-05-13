@@ -1,60 +1,51 @@
+#include "File.hpp"
 
-#include "./File.hpp"
-
-File::File()
-{
-  file = new File(); // Initialize the File pointer
+template<typename T>
+bool File<T>::saveData(const char* fileName, const T& data) {
+    size_t dataSize = sizeof(T);
+    const byte* dataPtr = reinterpret_cast<const byte*>(&data);
+    for (size_t i = 0; i < dataSize; i++) {
+        EEPROM.write(i, dataPtr[i]);
+    }
+    EEPROM.commit();
+    return true;
 }
 
-File::~File()
-{
-  delete file; // Clean up the File pointer in the destructor
+template<typename T>
+bool File<T>::readData(const char* fileName, T& data) {
+    size_t dataSize = sizeof(T);
+    byte* dataPtr = reinterpret_cast<byte*>(&data);
+    for (size_t i = 0; i < dataSize; i++) {
+        dataPtr[i] = EEPROM.read(i);
+    }
+    return true;
 }
 
-std::string File::readFile()
-{
-  if (LittleFS.begin())
-  {
-    *file = LittleFS.open("/data.txt", "r");
-    if (*file)
-    {
-      String content;
-      while (file->available())
-      {
-        content += file->readStringUntil('\n');
-      }
-      file->close();
-      return content;
-    }
-    else
-    {
-      return "Error: Unable to open the file.";
-    }
-  }
-  else
-  {
-    return "Error: Unable to initialize LittleFS.";
-  }
+template<typename T>
+bool File<T>::updateData(const char* fileName, const T& data) {
+    return saveData(fileName, data); 
 }
 
-void File::saveFile()
-{
-  if (LittleFS.begin())
-  {
-    *file = LittleFS.open("/data.txt", "w");
-    if (*file)
-    {
-      // Write file content here
-      file->println("File content");
-      file->close();
+template<typename T>
+bool File<T>::deleteData(const char* fileName) {
+    size_t dataSize = sizeof(T);
+    for (size_t i = 0; i < dataSize; i++) {
+        EEPROM.write(i, 0); // Delete by writing 0 to EEPROM
     }
-    else
-    {
-      Serial.println("Error: Unable to open the file.");
-    }
-  }
-  else
-  {
-    Serial.println("Error: Unable to initialize LittleFS.");
-  }
+    EEPROM.commit();
+    return true;
 }
+
+
+/*
+exemple how to use 
+struct UserData {
+    int32_t _idUser;
+    // other members...
+};
+
+// Instantiate File for UserData
+File<UserData> userFile;
+
+*/
+

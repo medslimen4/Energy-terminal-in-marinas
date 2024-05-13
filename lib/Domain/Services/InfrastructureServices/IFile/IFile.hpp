@@ -1,8 +1,11 @@
 #include <string>
+template<typename T>
 
 struct IFile
 {
 
-  virtual std::string readFile() = 0;
-  virtual void saveFile() = 0;
+    virtual bool saveData(const char* fileName, const T& data) = 0;
+    virtual bool readData(const char* fileName, T& data) = 0;
+    virtual bool updateData(const char* fileName, const T& data) = 0;
+    virtual bool deleteData(const char* fileName) = 0;
 };

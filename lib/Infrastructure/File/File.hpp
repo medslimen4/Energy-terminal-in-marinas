@@ -1,21 +1,12 @@
-#ifndef FILE_HPP
-#define FILE_HPP
+#include <Arduino.h>
+#include <EEPROM.h>
 
-#include <string>
-#include "../Domain/Services/InfrastructureServices/IFile/IFile.hpp"
-#include <LittleFS.h>
 
-class File : public IFile
-{
-private:
-  File *file; // Use a pointer to File instead of an object
-
+template<typename T>
+class File : public IFile<T> {
 public:
-  File();  // Constructor
-  ~File(); // Destructor
-
-  std::string readFile() override;
-  void saveFile() override;
+    bool saveData(const char* fileName, const T& data) override;
+    bool readData(const char* fileName, T& data) override;
+    bool updateData(const char* fileName, const T& data) override;
+    bool deleteData(const char* fileName) override;
 };
-
-#endif // FILE_HPP

@@ -8,15 +8,17 @@ class BrokerCommunication : public IBrokerCommunication
 {
 private:
   PubSubClient client;
+  std::string serverAddress;
+  uint16_t serverPort;
 
 public:
-  void sendCommand(std::string topic, std::string payload) override;
-  void sendCommand(std::string topic, const uint8_t &payload, const uint16_t size) override;
-  void subscribe(std::function<void(char *, uint8_t *, uint8_t)> function) override;
+  BrokerCommunication(const std::string& serverAddress, uint16_t serverPort ,void (*messageCallback)(char*, byte*, unsigned int) = nullptr );
+  bool connect(const std::string& clientId) override;
+  bool publish(const std::string& topic, const std::string& payload, bool retained = false) override;
+  bool subscribe(const std::string& topic, uint8_t qos = 0) override;
+  bool unsubscribe(const std::string& topic) override;
+  void loop() override;
+  bool connected()  override;
 
-  // Constructor
-  BrokerCommunication(Client &client) : client(client) {}
-
-  // Destructor
-  ~BrokerCommunication() {}
+  void messageReceived(char* topic, byte* payload, unsigned int length);
 };
