@@ -10,9 +10,9 @@ Professional Master's in IoT Service Development
 
 <br>
 Under the supervision of:
-Wahid Bannour, 
-Researchers and technologists ,
-Higher Institute of Technological Studies of Mahdia ( ISET Mahdia )
+Wahid Bannour , 
+Researcher and Technologist , 
+Higher Institute of Technological Studies of Mahdia (ISET Mahdia)
 
 
 <h3>Title of the project:</h3>
